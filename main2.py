@@ -1,6 +1,6 @@
 import pygame, random
 
-from ElectricalComponents import Wire, Battery, LED
+from ElectricalComponents import Battery, LED
 
 width, height = 500, 500
 

@@ -24,4 +24,3 @@ def findLoop(graph):
     return loop
 
 print(findLoop(graph))
-

@@ -1,6 +1,6 @@
 import pygame
 
-from components import Battery, LED, draw, choose_children_position
+from components import Battery, LED, draw, evenly_space_components
 
 pygame.init()
 pygame.display.init()
@@ -11,18 +11,20 @@ components = {}
 
 first_component = Battery(screen)
 
-def addLED():
+def addLED(to_component):
     led = LED(screen)
-    components[first_component] = components.get(first_component, []) + [led]
-    components[led] = [first_component]
+    components[to_component] = components.get(to_component, []) + [led]
+    components[led] = [to_component]
 
 
-addLED()
+addLED(first_component)
+
+
 
 
 [print(i.position) for i in components]
 
-choose_children_position(first_component, components)
+evenly_space_components(first_component, components)
 
 while True:
 
@@ -40,7 +42,7 @@ while True:
                 pygame.display.quit()
                 pygame.quit()
             elif event.key == pygame.K_l:
-                addLED()
-                choose_children_position(first_component, components)
+                addLED(first_component)
+                evenly_space_components(first_component, components)
 
     pygame.display.update()

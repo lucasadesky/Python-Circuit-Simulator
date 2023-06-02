@@ -20,7 +20,7 @@ class LED:
     def draw(self):
         pygame.draw.circle(self.screen, self.color, self.position, self.radius)
 
-def choose_children_position(component, components:dict):
+def evenly_space_components(component, components:dict):
 
     distance_away = 50
     

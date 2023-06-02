@@ -33,8 +33,8 @@ class Node(ElectricalElement):
     def printType(self):
         print(self.type )
 
-    def checkClick(self, mousePos) -> bool:
-        return distanceToPoint(self.position, mousePos) < self.radius+2
+    def checkClick(self, mousePos, radius_multiplier = 1) -> bool:
+        return distanceToPoint(self.position, mousePos) < (self.radius+2) * radius_multiplier
     
     def checkClickReturnSelf(self, mousePos):
         if distanceToPoint(self.position, mousePos) < self.radius+2:
@@ -149,18 +149,18 @@ class Component(ElectricalElement):
         self.wire_out.anode.position = mousePos
 
     def dragNode(self, mousePos):
-        if self.wire_in.anode.checkClick(mousePos):
+        if self.wire_in.anode.checkClick(mousePos, 3):
             self.wire_in.anode.position = mousePos
-        elif self.wire_out.cathode.checkClick(mousePos):
+        elif self.wire_out.cathode.checkClick(mousePos, 3):
             self.wire_out.cathode.position = mousePos
 
     def checkNodeClick(self, mousePos, return_self = False):
         if return_self:
             return self.wire_in.anode.checkClickReturnSelf(mousePos)       
         else:
-            if self.wire_in.anode.checkClick(mousePos):
+            if self.wire_in.anode.checkClick(mousePos, 3):
                 return True
-            elif self.wire_out.cathode.checkClick(mousePos):
+            elif self.wire_out.cathode.checkClick(mousePos, 3):
                 return True
             else:
                 return False
